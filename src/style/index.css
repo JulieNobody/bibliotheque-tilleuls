@@ -1,0 +1,38 @@
+/*
+Couleurs
+772F1A - rouge
+232C33 - gris foncé
+FAF0CA - beige
+5A7D7C - bleu-vert
+*/
+
+/*
+    border: solid 3px red;
+*/
+
+
+body {
+  margin: 0;
+  padding: 30px;
+  font-family :'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: #FAF0CA;
+  color: #232C33;
+  font-weight: 500;
+
+}
+
+h1
+{
+  font-size: 40px;
+  font-weight: 1000;
+  color: #772F1A;
+}
+
+h4
+{
+  font-size: 25px;
+  font-weight: 1000;
+  color: #232C33;
+}
+
+

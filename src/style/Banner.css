@@ -1,0 +1,69 @@
+/* ------------------- GENERAL ------------------- */
+
+.banner
+{
+    border-bottom: solid 3px #232C33;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* ------------------- BLOC LOGO ------------------- */
+
+.banner .logo
+{
+    display: flex;
+    text-decoration: none;
+}
+
+.banner .logo img
+{
+    padding-left: 20px; 
+    max-height: 130px;
+    width: auto;
+}
+
+.banner .logo h1
+{
+   padding-left: 20px; 
+    max-height: 130px;
+    width: auto;
+    margin : 0px;
+}
+
+
+/* ------------------- BLOC CONNEXION ------------------- */
+
+.banner .connexion
+{
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+}
+
+
+.banner .connexion img
+{
+    max-height: 100px;
+    width: auto;
+}
+
+.banner .liens
+{
+    max-height: 100px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.banner .connexion p
+{
+    color: #232C33;
+    font-size: 18px;
+    font-weight: 950;
+    margin: 0px;
+
+}
+

@@ -1,0 +1,42 @@
+.catalogue
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pageActuelle
+{
+    text-align: center;
+}
+
+.pagination
+{
+    text-align: center;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    color: #772F1A;
+
+}
+
+.pagination li
+{
+    border: solid 3px #772F1A;
+    padding: 10px;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.pagination a
+{
+    color: #772F1A;
+    text-decoration: none;
+}
+
+.pagination a :visited
+{
+    color: #772F1A;
+}

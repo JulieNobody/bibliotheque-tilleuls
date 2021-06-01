@@ -1,0 +1,25 @@
+.filtres
+{
+    border: solid 3px #772F1A;
+    margin : 15px auto;
+    width: 700px;
+    height: 50px;
+    justify-self: center;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.filtres a
+{
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0px;
+    text-decoration: none;
+    color: #772F1A;
+}
+
+.filtres a :visited
+{
+    color: #772F1A;
+}

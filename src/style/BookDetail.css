@@ -1,0 +1,28 @@
+.bookDetail
+{
+    border: solid 3px #5A7D7C;
+    list-style: none;
+    width: 800px;
+    padding: 15px;
+    margin : 15px
+}
+
+.bookDetail h2
+{
+  color: #5A7D7C;
+  font-size: 25px;
+  font-weight: 950;
+  text-decoration: underline;
+  margin: 20px;
+}
+
+.bookDetail h3
+{
+  font-size: 18px;
+  font-weight: 900;
+  margin: 20px;
+}
+.bookDetail p
+{
+  margin: 20px;
+}
