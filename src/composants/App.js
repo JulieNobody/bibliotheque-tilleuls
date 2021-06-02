@@ -22,11 +22,7 @@ function App() {
         <Route path="/BookDetail/:id" children={<BookDetail />} />
           {/* exact : pour que seul "/" dirige vers cette page */}
         <Route exact path="/" component={Catalogue} />
-        <Route path="/:id" children={<Catalogue />} />
-
-        {/* en cas d'erreur */}
         <Route component={ErrorPage} />
-
 
       </Switch>
 

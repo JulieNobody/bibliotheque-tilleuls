@@ -19,7 +19,7 @@ function BookDetail (){
             .then((res) => res.json())
             .then((reviewResponse) => setReviewList(reviewResponse[`hydra:member`]));
 
-    }, [])
+    }, [id])
 
     return ( 
         <div>

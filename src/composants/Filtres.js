@@ -1,37 +1,28 @@
 import '../style/Filtres.css';
 import random from "../fonctions/random"
-import { Link, useHistory } from 'react-router-dom';
-import { useEffect, useState } from "react";
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useEffect, useState, useCallback } from "react";
 
 //TODO : souligner page en cours
 
 function Filtres(){
-
+    const location = useLocation()
     const [recherche, setRecherche] = useState();
     const history = useHistory()
-
     const [bookRandom, setBookRandom] = useState({});
 
     useEffect(() => {
         random().then((livre) => {
             setBookRandom(livre)
         })
-    })
-
-    function rechercheLivre(event)
-    {
-        setRecherche(event.target['monImput'].value)
-        event.preventDefault();
-    }
+    }, [location.key])
     
-
-    function redirect(){
+    /* eslint-disable react-hooks/exhaustive-deps */
+    const redirect = useCallback((e) => {
+        e.preventDefault();
         history.push(`/ResultRecherche/?title=${recherche}`)
-        //history.replace(redirectPath)
-        //history.go()
-    }
-    //FIXME : valider 2x pour faire une recherche
-
+    }, [recherche])
+    /* eslint-enable react-hooks/exhaustive-deps */
     
     return (
         <div className="filtres">
@@ -41,9 +32,9 @@ function Filtres(){
                     un livre au hasard
                 </Link>
 
-                <form onSubmit={rechercheLivre}>
-                    <input type="text" name='monImput' placeholder="Recherche par titre"/>
-                    <input type="submit" value="Rechercher" onClick={redirect}/>
+                <form onSubmit={redirect}>
+                    <input type="text" placeholder="Recherche par titre" value={recherche} onChange={(e) => setRecherche(e.target.value)} />
+                    <input type="submit" value="Rechercher" />
                 </form>
         </div>
     )
