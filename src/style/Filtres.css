@@ -10,16 +10,67 @@
     align-items: center;
 }
 
+/* ------------------- LIENS ------------------- */
+
 .filtres a
 {
+    margin-bottom: 3px;
     font-size: 18px;
     font-weight: 900;
     margin: 0px;
     text-decoration: none;
     color: #772F1A;
+    border: solid 3px #FAF0CA; 
 }
+
+.filtres a:hover
+{
+    border-bottom: solid 3px #772F1A;
+}
+
 
 .filtres a :visited
 {
     color: #772F1A;
+    border-bottom: solid 3px #772F1A;
+
+}
+
+/* ------------------- INPUT TEXT ------------------- */
+
+.filtres input[type=text]
+{
+    border: solid 3px #FAF0CA;
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0px;
+    color: #772F1A;
+    background-color: #FAF0CA;
+}
+
+.filtres input[type=text]:focus
+{
+    background-color: #FAF0CA;
+}
+
+.filtres input[type=text]:hover
+{
+    border-bottom: solid 3px #772F1A;
+}
+
+/* ------------------- INPUT BOUTON ------------------- */
+
+.filtres input[type=submit]
+{
+    border: solid 3px #FAF0CA;
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0px;
+    color: #772F1A;
+    background-color: #FAF0CA;
+}
+
+.filtres input[type=submit]:hover
+{
+    border-bottom: solid 3px #772F1A;
 }

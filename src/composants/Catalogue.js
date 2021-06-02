@@ -31,6 +31,8 @@ function Catalogue() {
 
     }, [currentPage])
 
+    console.log(query.get("page"));
+
     return (
         <div>
             <h4>Catalogue</h4>
@@ -48,20 +50,26 @@ function Catalogue() {
                     />
                 ))}
             </div>
-            <p className="pageActuelle">- page { query.get("page") } -</p>
+            <p className="pageActuelle">- page { 
+                    query.get("page")
+                ?
+                    query.get("page")
+                :
+                    "1"
+            } -</p>
 
             <ul className="pagination">
 
-                {( query.get("page") !== page.first )
+                {( query.get("page") !== 1 && query.get("page") != null)
                     ? 
-                        <li><Link to={`/?page=${page.first}`} >
+                        <li><Link to={`/?page=${1}`} >
                             Première page
                         </Link></li>
                     :
                         ""
                 }
 
-                {( query.get("page") !== page.first )
+                {( query.get("page") !== page.first  && query.get("page") != null)
                     ? 
                         <li><Link to={`/?page=${query.get("page") - 1}`} >
                             Page précédente
@@ -93,5 +101,6 @@ function Catalogue() {
         </div>
     )
 }
+//TODO : gerer ancres (voir scrool react)
 
 export default Catalogue;
