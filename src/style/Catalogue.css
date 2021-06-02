@@ -30,6 +30,13 @@
     font-weight: 600;
 }
 
+.desactiv
+{
+    border: solid 3px #c8c0a1 !important;
+    color: #c8c0a1;
+    
+}
+
 .pagination a
 {
     color: #772F1A;

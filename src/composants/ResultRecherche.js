@@ -12,16 +12,17 @@ function ResultRecherche() {
     const [bookList, setBookList] = useState([]);
 
     const query = useQuery();
+    const titreRecherche = query.get("title")       //le tableau de dépendance du useEffect préfére une variable qu'une équation
 
     useEffect(() => {
-        fetch("https://localhost/books?title=" + query.get("title"))
+        fetch("https://localhost/books?title=" + titreRecherche)
             .then((res) => res.json())
             .then((bookResponse) => {
                 setBookList(bookResponse[`hydra:member`])
             }
         );
 
-    }, [query.get("title")])
+    }, [titreRecherche])
 
     return (
         <div>

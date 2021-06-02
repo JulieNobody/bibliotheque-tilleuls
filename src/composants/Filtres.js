@@ -3,8 +3,6 @@ import random from "../fonctions/random"
 import { Link, useHistory } from 'react-router-dom';
 import { useEffect, useState } from "react";
 
-
-//TODO : ajouter un lien retour (calatogue)
 //TODO : souligner page en cours
 
 function Filtres(){
@@ -29,9 +27,12 @@ function Filtres(){
 
     function redirect(){
         history.push(`/ResultRecherche/?title=${recherche}`)
+        //history.replace(redirectPath)
+        //history.go()
     }
     //FIXME : valider 2x pour faire une recherche
 
+    
     return (
         <div className="filtres">
                 <Link to="/">Catalogue</Link>

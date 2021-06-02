@@ -60,13 +60,13 @@ function Catalogue() {
 
             <ul className="pagination">
 
-                {( query.get("page") !== 1 && query.get("page") != null)
+                {( query.get("page") != 1 && query.get("page") != null)
                     ? 
                         <li><Link to={`/?page=${1}`} >
                             Première page
                         </Link></li>
                     :
-                        ""
+                        <li className="desactiv">Première page</li>
                 }
 
                 {( query.get("page") !== page.first  && query.get("page") != null)
@@ -75,7 +75,7 @@ function Catalogue() {
                             Page précédente
                         </Link></li>
                     :
-                        ""
+                        <li className="desactiv">Page précédente</li>
                 }
 
 
@@ -85,7 +85,7 @@ function Catalogue() {
                             Page suivante
                         </Link></li>
                     :
-                        ""
+                        <li className="desactiv">Page suivante</li>
                 }
 
                 {( query.get("page") !== page.last )
@@ -94,7 +94,7 @@ function Catalogue() {
                             Dernière page
                         </Link></li>
                     :
-                        ""
+                        <li className="desactiv">Dernière page</li>
                 }
 
             </ul>

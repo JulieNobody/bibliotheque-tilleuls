@@ -1,4 +1,4 @@
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import '../style/App.css';
 import Banner from './Banner';
 import Catalogue from './Catalogue';
