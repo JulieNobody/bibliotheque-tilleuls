@@ -1,14 +1,17 @@
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import formatDate from "../fonctions/formatDate";
+import { Link } from 'react-router-dom';
 import '../style/BookDetail.css';
+
+//INFO : "id" dans au tableau des dépendances permet de refresh quand l'url change
+//TODO : lien pour supprimer le livre
 
 function BookDetail (){
 
     const { id } = useParams();
     const [book, setBook] = useState({});
     const [reviewList, setReviewList] = useState([]);
-
 
     useEffect(() => {
         fetch(`https://localhost/books/${id}`)
@@ -33,6 +36,11 @@ function BookDetail (){
                     paru le {formatDate(book.publicationDate)}
                 </h3>
                 <p>Résumé :<br/>{book.description}</p>
+
+                <Link to={{ pathname: `/ModifLivre/?idLivre=${book.id}` }} >
+                    Modifier le livre ✏️
+                </Link>
+
             </div>
 
             <h4>Avis</h4>
@@ -53,7 +61,6 @@ function BookDetail (){
             </div>
 
         </div>
-
     )
 }
 

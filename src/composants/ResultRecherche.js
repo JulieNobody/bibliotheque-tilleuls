@@ -3,6 +3,8 @@ import '../style/Catalogue.css';
 import { useEffect, useState } from "react";
 import { Link, useLocation } from 'react-router-dom';
 
+//INFO : le tableau de dépendance du useEffect préfére une variable qu'une équation (cfL17)
+
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
@@ -12,7 +14,7 @@ function ResultRecherche() {
     const [bookList, setBookList] = useState([]);
 
     const query = useQuery();
-    const titreRecherche = query.get("title")       //le tableau de dépendance du useEffect préfére une variable qu'une équation
+    const titreRecherche = query.get("title")
 
     useEffect(() => {
         fetch("https://localhost/books?title=" + titreRecherche)
@@ -31,7 +33,6 @@ function ResultRecherche() {
                 {bookList.map((book) => (
                     <Book
                         key={book['@id']}
-                        // id={book['@id']}
                         id={book.id}
                         isbn={book.isbn}
                         title={book.title}

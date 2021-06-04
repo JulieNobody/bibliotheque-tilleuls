@@ -57,3 +57,19 @@
 {
   font-size: 30px;
 }
+
+/* ------------------- LIENS ------------------- */
+
+.bookDetail a
+{
+  color: #232C33;
+  text-decoration: none;
+  margin: 10px;
+  padding-bottom: 4px;
+  border-bottom: solid 3px #5A7D7C;
+}
+
+.bookDetail a :visited
+{
+    color: #232C33;
+}

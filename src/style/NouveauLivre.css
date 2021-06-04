@@ -1,0 +1,128 @@
+.blocForm
+{
+    margin: 15px;
+}
+
+.messageErreur
+{
+    width: 700px;
+    font-size: 15px;
+    font-weight: 600;
+    color: red;
+}
+
+/* ------------------- FORM ------------------- */
+.nouveaulivre form
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+    
+
+}
+
+/* ------------------- LABEL ------------------- */
+.blocForm label
+{
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0px;
+    color: #772F1A;
+    border: solid 3px #FAF0CA;
+
+}
+
+.nouveaulivre form label:hover
+{
+    border-bottom: solid 3px #772F1A;
+}
+
+
+/* ------------------- INPUT TEXT ------------------- */
+
+.nouveaulivre input[type=text]
+{
+    
+    border: solid 3px #FAF0CA;
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0px;
+    margin-left: 40px;
+    color: #772F1A;
+    background-color: #FAF0CA;
+}
+
+.nouveaulivre input[type=text]:focus
+{
+    background-color: #FAF0CA;
+}
+
+.nouveaulivre input[type=text]:hover
+{
+    border-bottom: solid 3px #772F1A;
+}
+
+/* ------------------- INPUT DATE ------------------- */
+
+.nouveaulivre input[type=date]
+{
+    border: solid 3px #FAF0CA;
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0px;
+    margin-left: 40px;
+    color: #772F1A;
+    background-color: #FAF0CA;
+}
+
+.nouveaulivre input[type=date]:focus
+{
+    background-color: #FAF0CA;
+}
+
+.nouveaulivre input[type=date]:hover
+{
+    border-bottom: solid 3px #772F1A;
+}
+
+/* ------------------- TEXTAREA ------------------- */
+
+.nouveaulivre textarea
+{
+    border: solid 3px #c8c0a1;
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0px;
+    margin-left: 40px;
+    color: #772F1A;
+    background-color: #FAF0CA;
+}
+
+.nouveaulivre textarea:focus
+{
+    background-color: #FAF0CA;
+}
+
+.nouveaulivre textarea:hover
+{
+    border-bottom: solid 3px #772F1A;
+}
+
+
+/* ------------------- INPUT BOUTON ------------------- */
+
+.nouveaulivre input[type=submit]
+{
+    border: solid 3px #772F1A;
+    font-size: 18px;
+    font-weight: 900;
+    margin: 15px;
+    color: #772F1A;
+    background-color: #FAF0CA;
+}
+
+.nouveaulivre input[type=submit]:hover
+{
+    box-shadow: 1px 1px 5px #772F1A;
+}

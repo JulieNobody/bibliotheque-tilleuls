@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import random from "../fonctions/random";
 
-//FIXME : quand on est sur une page de détail d'un livre, le lien random ne marche pas
-
 function Footer() {
 
     const [bookRandom, setBookRandom] = useState({});

@@ -2,13 +2,7 @@ import '../style/Book.css';
 import { Link } from 'react-router-dom';
 import formatDate from "../fonctions/formatDate";
 
-function Book ({id, isbn, title, author, publicationDate, description}){    
-    
-    // function prepaUrl(url)
-    // {
-    //     const newUrl = url.replace('books/', '');
-    //     return newUrl
-    // }
+function Book ({id, title, author, publicationDate}){    
     
     return (
         <div className="book">

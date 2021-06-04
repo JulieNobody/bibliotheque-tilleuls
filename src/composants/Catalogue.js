@@ -3,6 +3,9 @@ import '../style/Catalogue.css';
 import { useEffect, useState } from "react";
 import { Link, useLocation } from 'react-router-dom';
 
+//TODO : gerer ancres (voir scrool react)
+//INFO : dans condition, "!!" permet de faire une double negation (et utiliser ===)
+
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
@@ -40,7 +43,6 @@ function Catalogue() {
                 {bookList.map((book) => (
                     <Book
                         key={book['@id']}
-                        // id={book['@id']}
                         id={book.id}
                         isbn={book.isbn}
                         title={book.title}
@@ -101,6 +103,5 @@ function Catalogue() {
         </div>
     )
 }
-//TODO : gerer ancres (voir scrool react)
 
 export default Catalogue;

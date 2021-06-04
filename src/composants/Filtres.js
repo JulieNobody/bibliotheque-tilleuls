@@ -4,6 +4,11 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useEffect, useState, useCallback } from "react";
 
 //TODO : souligner page en cours
+//INFO : /* eslint-disable react-hooks/exhaustive-deps */ puis  /* eslint-enable react-hooks/exhaustive-deps */
+//INFO : permet de désactiver la règle sur quelques lignes
+//INFO : ici, conseille d'ajouter "history" au tableau des dépendances (pas pertinant puisque ne va pas changer)
+//INFO : "location.key" id du render, l'ajouter au tableau des dépendances permet de refresh quand l'url change
+//INFO : 
 
 function Filtres(){
     const location = useLocation()
@@ -36,6 +41,9 @@ function Filtres(){
                     <input type="text" placeholder="Recherche par titre" value={recherche} onChange={(e) => setRecherche(e.target.value)} />
                     <input type="submit" value="Rechercher" />
                 </form>
+
+                <Link to="/NouveauLivre">Ajouter un livre</Link>
+
         </div>
     )
 }
