@@ -6,6 +6,26 @@ import { useState } from "react";
 import * as yup from 'yup';
 // import { setLocale } from 'yup';
 import '../style/NouveauLivre.css';
+import * as ISBN from 'isbn-validate';
+
+
+// yup.addMethod(yup.string, "isbn",function() {
+
+//     return this.transform(function (value, originalValue) {
+//         if (this.isType(value)) return value;
+    
+        
+    
+//         return ISBN.Validate(myBook.isbn);
+//       });
+
+
+//     //return this.transform(ISBN.Validate(myBook.isbn))
+
+// })
+
+
+//console.log("yup", yup)
 
 //FIXME : reg ex ISBN // pattern: ^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$
 //FIXME : date de parution, DateTimeInterface (2021-06-03T07:46:42.652Z)
@@ -46,17 +66,33 @@ import '../style/NouveauLivre.css';
     // instauration des regles de validation
     //INFO : placé à l'exterieur du onSubmit pour éviter la dépense de ressource
     let validationSchema = yup.object().shape({
-        title : yup.string("Le titre doit être composé de lettres").required("Vous devez saisir un titre"),
-        isbn : yup.number("L'ISMB doit être composé de chiffres").required("Vous devez saisir un numéro ISBN"),
-        author : yup.string("L'auteur doit être composé de lettres").required("Vous devez saisir un auteur"),
-        publicationDate : yup.date("La date de parution doit être une date").required("Vous devez indiquer une date de parution").default(function() { return new Date() }),
-        description : yup.string("Le résumé doit être composé de lettres").required("Vous devez saisir un résumé du livre"),
+        title :
+            yup.string("Le titre doit être composé de lettres")
+            .required("Vous devez saisir un titre"),
+        
+        // isbn:
+        //     yup.isbn(),
+        isbn :
+            yup.string("fixme")
+            .required("Vous devez saisir un numéro ISBN")
+            .length (13, "taille")
+            .matches(/[0-9]/, "chiffres"),
+        //      //FIXME : messages
+        author :
+            yup.string("L'auteur doit être composé de lettres").required("Vous devez saisir un auteur"),
+        publicationDate :
+            yup.date("La date de parution doit être une date")
+            .required("Vous devez indiquer une date de parution")
+            .default(function() { return new Date() }), //FIXME à enlever ?
+        description :
+            yup.string("Le résumé doit être composé de lettres")
+            .required("Vous devez saisir un résumé du livre"),
     })
 
 function NouveauLivre (){
 
     // -------------------- DECLARATION VARIABLE MYBOOK --------------------
-    //objet JS != json -> faire stringify avant envoi
+    //INFO : objet JS != json -> faire stringify avant envoi
     var myBook = {
         title : '',
         isbn : '',
@@ -76,19 +112,55 @@ function NouveauLivre (){
 
     // -------------------- ONSUBMIT--------------------
     const onSubmit = data => {
-        console.log("data : ",data)
+        //console.log("data : ",data)
         myBook = data
 
         //INFO : var + "" transforme en string
         myBook.isbn = data.isbn + ""//FIXME
 
-        console.log ("1 : ",myBook.publicationDate)
-        console.log ("2 : ",myBook.publicationDate.toString())
-        console.log ("3 : ",myBook.publicationDate.toString().slice(8,20))
-        console.log ("4 : ",myBook.publicationDate.toString().slice(8,20) + "T00:00:00.000Z")
-  
-        myBook.publicationDate = myBook.publicationDate.toString().slice(0,10) + "T00:00:00.000Z" //FIXME
-        //FIXME : format attendu : 2021-06-08T22:00:00.000Z
+
+        //format date (format attendu : 2021-06-08T22:00:00.000Z)
+
+        myBook.publicationDate = new Date(myBook.publicationDate);
+
+        if( myBook.publicationDate.getMonth()+1 < 10)
+        {
+            myBook.publicationDate = 
+                myBook.publicationDate.getFullYear()
+                +
+                "-0"
+                +
+                (myBook.publicationDate.getMonth() +1)
+                +
+                "-"
+                +
+                myBook.publicationDate.getDate()
+                +
+                "T00:00:00.000Z";
+        }else{
+            myBook.publicationDate = 
+                myBook.publicationDate.getFullYear()
+                +
+                "-"
+                +
+                (myBook.publicationDate.getMonth() +1)
+                +
+                "-"
+                +
+                myBook.publicationDate.getDate()
+                +
+                "T00:00:00.000Z";
+        }
+
+        //TEST--------------------------------------
+        console.log("isbn : ",myBook.isbn)
+
+        //const ISBN = require('isbn-validate')
+        //permet d'utiliser ISBN.Validate
+
+    
+        console.log("isbn validate : ",ISBN.Validate(myBook.isbn))
+
 
         const requestOptions = {
             method: 'POST',
@@ -101,11 +173,11 @@ function NouveauLivre (){
           .then(data => setPostId(data.id));
         console.log("postId : ", postId)
 
-        console.log("validationSchema : ",validationSchema)
+        // console.log("validationSchema : ",validationSchema)
        
-        const myBookString = JSON.stringify(myBook)
-        console.log("mybook : ",myBook)
-        console.log("myBookString: ", myBookString)
+        // const myBookString = JSON.stringify(myBook)
+        // console.log("mybook : ",myBook)
+        console.log("myBookString: ", JSON.stringify(myBook))
 
 
 
