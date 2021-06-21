@@ -1,7 +1,7 @@
-import '../style/Filtres.css';
-import random from "../fonctions/random"
-import { Link, useHistory, useLocation } from 'react-router-dom';
-import { useEffect, useState, useCallback } from "react";
+import '../style/Filtres.css'
+import random from '../fonctions/random'
+import { Link, useHistory, useLocation } from 'react-router-dom'
+import React, { useEffect, useState, useCallback } from 'react'
 
 //TODO : souligner page en cours
 //INFO : /* eslint-disable react-hooks/exhaustive-deps */ puis  /* eslint-enable react-hooks/exhaustive-deps */
@@ -12,9 +12,9 @@ import { useEffect, useState, useCallback } from "react";
 
 function Filtres(){
     const location = useLocation()
-    const [recherche, setRecherche] = useState();
+    const [recherche, setRecherche] = useState()
     const history = useHistory()
-    const [bookRandom, setBookRandom] = useState({});
+    const [bookRandom, setBookRandom] = useState({})
 
     useEffect(() => {
         random().then((livre) => {
@@ -22,12 +22,12 @@ function Filtres(){
         })
     }, [location.key])
     
-    /* eslint-disable react-hooks/exhaustive-deps */
+    //eslint-disable react-hooks/exhaustive-deps
     const redirect = useCallback((e) => {
-        e.preventDefault();
+        e.preventDefault()
         history.push(`/ResultRecherche/?title=${recherche}`)
     }, [recherche])
-    /* eslint-enable react-hooks/exhaustive-deps */
+    // eslint-enable react-hooks/exhaustive-deps
     
     return (
         <div className="filtres">
@@ -48,4 +48,4 @@ function Filtres(){
     )
 }
 
-export default Filtres;
+export default Filtres

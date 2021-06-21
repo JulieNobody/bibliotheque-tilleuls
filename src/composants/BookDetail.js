@@ -1,26 +1,26 @@
-import { useParams } from "react-router";
-import { useEffect, useState } from "react";
-import formatDate from "../fonctions/formatDate";
-import { Link } from 'react-router-dom';
-import '../style/BookDetail.css';
+import { useParams } from 'react-router'
+import React,{ useEffect, useState } from 'react'
+import formatDate from '../fonctions/formatDate'
+import { Link } from 'react-router-dom'
+import '../style/BookDetail.css'
 
 //INFO : "id" dans au tableau des dépendances permet de refresh quand l'url change
 //TODO : lien pour supprimer le livre
 
 function BookDetail (){
 
-    const { id } = useParams();
-    const [book, setBook] = useState({});
-    const [reviewList, setReviewList] = useState([]);
+    const { id } = useParams()
+    const [book, setBook] = useState({})
+    const [reviewList, setReviewList] = useState([])
 
     useEffect(() => {
         fetch(`https://localhost/books/${id}`)
             .then((res) => res.json())
-            .then((book) => setBook(book));
+            .then((book) => setBook(book))
 
         fetch(`https://localhost/books/${id}/reviews`)
             .then((res) => res.json())
-            .then((reviewResponse) => setReviewList(reviewResponse[`hydra:member`]));
+            .then((reviewResponse) => setReviewList(reviewResponse[`hydra:member`]))
 
     }, [id])
 
@@ -50,8 +50,8 @@ function BookDetail (){
                     <div className="review" key={review['@id']}>
                         <p className="auteur">{review.author} - {formatDate(review.publicationDate)}</p>
                         <div className="rate">
-                                {(new Array (review.rating).fill("★").join(''))}
-                                {(new Array (5 - review.rating).fill("☆").join(''))}
+                                {(new Array (review.rating).fill('★').join(''))}
+                                {(new Array (5 - review.rating).fill('☆').join(''))}
                         </div>
                         
                         <p>{review.body}</p>
@@ -64,4 +64,4 @@ function BookDetail (){
     )
 }
 
-export default BookDetail;
+export default BookDetail

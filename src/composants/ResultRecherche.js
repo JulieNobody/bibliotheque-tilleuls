@@ -1,28 +1,29 @@
-import Book from './Book';
-import '../style/Catalogue.css';
-import { useEffect, useState } from "react";
-import { Link, useLocation } from 'react-router-dom';
+import Book from './Book'
+import '../style/Catalogue.css'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+
 
 //INFO : le tableau de dépendance du useEffect préfére une variable qu'une équation (cfL17)
 
 function useQuery() {
-    return new URLSearchParams(useLocation().search);
+    return new URLSearchParams(useLocation().search)
 }
 
 function ResultRecherche() {
 
-    const [bookList, setBookList] = useState([]);
+    const [bookList, setBookList] = useState([])
 
-    const query = useQuery();
-    const titreRecherche = query.get("title")
+    const query = useQuery()
+    const titreRecherche = query.get('title')
 
     useEffect(() => {
-        fetch("https://localhost/books?title=" + titreRecherche)
+        fetch('https://localhost/books?title=' + titreRecherche)
             .then((res) => res.json())
             .then((bookResponse) => {
                 setBookList(bookResponse[`hydra:member`])
             }
-        );
+        )
 
     }, [titreRecherche])
 
@@ -49,10 +50,10 @@ function ResultRecherche() {
                             catalogue
                         </Link></p>
                     :
-                       ""
+                       ''
                 }
         </div>
     )
 }
 
-export default ResultRecherche;
+export default ResultRecherche

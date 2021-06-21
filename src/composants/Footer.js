@@ -1,11 +1,11 @@
-import '../style/Footer.css';
-import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
-import random from "../fonctions/random";
+import '../style/Footer.css'
+import React,{ useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import random from '../fonctions/random'
 
 function Footer() {
 
-    const [bookRandom, setBookRandom] = useState({});
+    const [bookRandom, setBookRandom] = useState({})
 
     useEffect(() => {
         random().then((livre) => {
@@ -25,4 +25,4 @@ function Footer() {
     )
 }
 
-export default Footer;
+export default Footer

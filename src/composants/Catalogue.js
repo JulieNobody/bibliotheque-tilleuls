@@ -1,25 +1,27 @@
-import Book from './Book';
-import '../style/Catalogue.css';
-import { useEffect, useState } from "react";
-import { Link, useLocation } from 'react-router-dom';
+import Book from './Book'
+import '../style/Catalogue.css'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+
+
 
 //TODO : gerer ancres (voir scrool react)
 //INFO : dans condition, "!!" permet de faire une double negation (et utiliser ===)
 
 function useQuery() {
-    return new URLSearchParams(useLocation().search);
+    return new URLSearchParams(useLocation().search)
 }
 
 function Catalogue() {
 
-    const [bookList, setBookList] = useState([]);
-    const [page, setPage] = useState([]);
+    const [bookList, setBookList] = useState([])
+    const [page, setPage] = useState([])
 
-    const query = useQuery();
-    const currentPage = query.get("page") ? "?page=" + query.get("page") : "";
+    const query = useQuery()
+    const currentPage = query.get('page') ? '?page=' + query.get('page') : ''
 
     useEffect(() => {
-        fetch("https://localhost/books" + currentPage)
+        fetch('https://localhost/books' + currentPage)
             .then((res) => res.json())
             .then((bookResponse) => {
                 setBookList(bookResponse[`hydra:member`])
@@ -27,14 +29,14 @@ function Catalogue() {
                 setPage({
                     first: view['hydra:first'].replace('/books?page=',''),
                     last: view['hydra:last'].replace('/books?page=',''),
-                    next:view['hydra:next'] ? view['hydra:next'].replace('/books?page=','') : ""
+                    next:view['hydra:next'] ? view['hydra:next'].replace('/books?page=','') : ''
                 })
             }
-        );
+        )
 
     }, [currentPage])
 
-    console.log(query.get("page"));
+    console.log(query.get('page'))
 
     return (
         <div>
@@ -53,16 +55,16 @@ function Catalogue() {
                 ))}
             </div>
             <p className="pageActuelle">- page { 
-                    query.get("page")
+                    query.get('page')
                 ?
-                    query.get("page")
+                    query.get('page')
                 :
-                    "1"
+                    '1'
             } -</p>
 
             <ul className="pagination">
 
-                {( query.get("page") !== 1 && !!query.get("page"))
+                {( query.get('page') !== 1 && !!query.get('page'))
                     ? 
                         <li><Link to={`/?page=${1}`} >
                             Première page
@@ -71,9 +73,9 @@ function Catalogue() {
                         <li className="desactiv">Première page</li>
                 }
 
-                {( query.get("page") !== page.first  && !!query.get("page"))
+                {( query.get('page') !== page.first  && !!query.get('page'))
                     ? 
-                        <li><Link to={`/?page=${query.get("page") - 1}`} >
+                        <li><Link to={`/?page=${query.get('page') - 1}`} >
                             Page précédente
                         </Link></li>
                     :
@@ -81,7 +83,7 @@ function Catalogue() {
                 }
 
 
-                {( query.get("page") !== page.last )
+                {( query.get('page') !== page.last )
                     ? 
                         <li><Link to={`/?page=${page.next}`} >
                             Page suivante
@@ -90,7 +92,7 @@ function Catalogue() {
                         <li className="desactiv">Page suivante</li>
                 }
 
-                {( query.get("page") !== page.last )
+                {( query.get('page') !== page.last )
                     ? 
                         <li><Link to={`/?page=${page.last}`} >
                             Dernière page
@@ -104,4 +106,4 @@ function Catalogue() {
     )
 }
 
-export default Catalogue;
+export default Catalogue

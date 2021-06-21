@@ -1,11 +1,11 @@
-import { useForm } from "react-hook-form";
-//import { useEffect, useState } from "react";
-//import axios from "axios";
-import * as yup from 'yup';
-import { setLocale } from 'yup';
-import '../style/NouveauLivre.css';
-import { useEffect, useState } from "react";
-import { useLocation } from 'react-router-dom';
+import { useForm } from 'react-hook-form'
+//import { useEffect, useState } from "react"
+//import axios from "axios"
+import * as yup from 'yup'
+import { setLocale } from 'yup'
+import '../style/NouveauLivre.css'
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 
 //FIXME : reg ex ISBN
@@ -16,28 +16,28 @@ function ModifLivre (){
 
     // -------------------- RECUPERATION DU PARAM DANS URL --------------------
     function useQuery() {
-        return new URLSearchParams(useLocation().search);
+        return new URLSearchParams(useLocation().search)
     }
-    const [book, setBook] = useState({});
-    const query = useQuery();
-    const idLivre = query.get("idLivre")
+    const [book, setBook] = useState({})
+    const query = useQuery()
+    const idLivre = query.get('idLivre')
 
     useEffect(() => {
         fetch(`https://localhost/books/${idLivre}`)
             .then((res) => res.json())
-            .then((book) => setBook(book));
+            .then((book) => setBook(book))
 
     }, [idLivre])
 
-    console.log("query : ",query)
-    console.log("idLivre : ",idLivre)
-    console.log("book : ",book)
+    console.log('query : ',query)
+    console.log('idLivre : ',idLivre)
+    console.log('book : ',book)
 
     
-    const messageErreur = "";
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const messageErreur = ''
+    const { register, handleSubmit, formState: { errors } } = useForm()
     const onSubmit = data => {
-        console.log("data : ",data)
+        console.log('data : ',data)
 
         // -------------------- INITIALISATION AXIOS / YUP --------------------
 
@@ -46,7 +46,7 @@ function ModifLivre (){
             mixed: {
               default: 'Champs non valide',
             },
-          });
+          })
 
         // instauration des regles de validation
         let schema = yup.object().shape({
@@ -60,19 +60,19 @@ function ModifLivre (){
         schema
             .validate(data)
             .then(function(value) {
-                console.log("value : ",value)
+                console.log('value : ',value)
             })
             .catch(function(err){
-                console.log("err : ",err)
-                const messageErreur = "erreur !"
-                console.log("messageErr", messageErreur)
+                console.log('err : ',err)
+                const messageErreur = 'erreur !'
+                console.log('messageErr', messageErreur)
 
             })
 
-            console.log("messageErr", messageErreur)
-            console.log("schema", schema)
+            console.log('messageErr', messageErreur)
+            console.log('schema', schema)
      
-    };
+    }
 
 
     return (
@@ -85,7 +85,7 @@ function ModifLivre (){
                 {/* --------- TITRE --------- */}
                 <div className="blocForm">
                     <label>Titre</label>
-                    <input value={book.title} type="text" {...register("title", { 
+                    <input value={book.title} type="text" {...register('title', { 
                         required: true,
                         minLength : 3 })} />
                 </div>
@@ -97,7 +97,7 @@ function ModifLivre (){
                 {/* --------- ISBN --------- */}
                 <div className="blocForm">
                     <label>ISBN</label>
-                    <input value={book.isbn} type="text" {...register("isbn", { 
+                    <input value={book.isbn} type="text" {...register('isbn', { 
                         required: true,
                         //pattern: ^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$
                     })}/>
@@ -111,7 +111,7 @@ function ModifLivre (){
                 {/* --------- AUTEUR --------- */}
                 <div className="blocForm">
                     <label>Auteur</label>
-                    <input value={book.author} type="text" {...register("author", { required: true })} />
+                    <input value={book.author} type="text" {...register('author', { required: true })} />
                 </div>
 
                 <div className="blocForm">
@@ -121,7 +121,7 @@ function ModifLivre (){
                 {/* --------- DATE PARUTION --------- */}
                 <div className="blocForm">
                     <label>Date de parution</label>
-                    <input value={book.publicationDate} type="date" {...register("publicationDate", { required: true })} />
+                    <input value={book.publicationDate} type="date" {...register('publicationDate', { required: true })} />
                 </div>
 
                 <div className="blocForm">
@@ -131,7 +131,7 @@ function ModifLivre (){
                 {/* --------- RESUME --------- */}
                 <div className="blocForm">
                     <label>Résumé</label>
-                    <textarea value={book.description} rows="10" cols="100" {...register("description", { required: true })} />
+                    <textarea value={book.description} rows="10" cols="100" {...register('description', { required: true })} />
                 </div>
 
                 <div className="blocForm">
@@ -146,4 +146,4 @@ function ModifLivre (){
     )
 }
 
-export default ModifLivre;
+export default ModifLivre

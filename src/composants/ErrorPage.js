@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import React from 'react'
 
-
+//FIXME echapement apostrophe
 function ErrorPage (){
    
     return (
@@ -10,4 +11,4 @@ function ErrorPage (){
     )
 }
 
-export default ErrorPage;
+export default ErrorPage

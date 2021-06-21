@@ -1,7 +1,8 @@
-import '../style/Banner.css';
-import logo from '../assets/logo.png';
-import profilePicture from '../assets/profile-picture.png';
-import { Link } from 'react-router-dom';
+import '../style/Banner.css'
+import logo from '../assets/logo.png'
+import profilePicture from '../assets/profile-picture.png'
+import { Link } from 'react-router-dom'
+import React from 'react'
 
 
 
@@ -13,7 +14,7 @@ function Logo() {
         </Link>
     )
 }
-
+//FIXME : échapement apostrophe
 function Connexion() {
     return (
         <div className="connexion">
@@ -37,4 +38,4 @@ function Banner(){
     )
 }
 
-export default Banner;
+export default Banner

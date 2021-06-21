@@ -1,14 +1,15 @@
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import '../style/App.css';
-import Banner from './Banner';
-import Catalogue from './Catalogue';
-import Footer from './Footer';
-import Filtres from './Filtres';
-import BookDetail from './BookDetail';
-import ResultRecherche from './ResultRecherche';
-import NouveauLivre from './NouveauLivre';
-import ModifLivre from './ModifLivre';
-import ErrorPage from './ErrorPage';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import '../style/App.css'
+import Banner from './Banner'
+import Catalogue from './Catalogue'
+import Footer from './Footer'
+import Filtres from './Filtres'
+import BookDetail from './BookDetail'
+import ResultRecherche from './ResultRecherche'
+import NouveauLivre from './NouveauLivre'
+import ModifLivre from './ModifLivre'
+import ErrorPage from './ErrorPage'
+import React from 'react'
 
 function App() {
 //FIXME : errorPage ne fonctionne pas
@@ -19,6 +20,8 @@ function App() {
 //A-VOIR : différence entre component et children (route)
 //A-VOIR : useCallback
 //A-VOIR : react hook form
+
+//FIXME : erreurs l33 etc
 
   return (
     <BrowserRouter>
@@ -38,7 +41,7 @@ function App() {
 
       <Footer />
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
