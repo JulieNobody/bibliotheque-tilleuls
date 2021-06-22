@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './style/index.css';
-import App from './composants/App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './style/index.css'
+import App from './composants/App'
 
 
 ReactDOM.render(
@@ -9,5 +9,5 @@ ReactDOM.render(
     <App />
   </React.StrictMode>,
   document.getElementById('root')
-);
+)
 

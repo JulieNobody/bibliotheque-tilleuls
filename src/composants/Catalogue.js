@@ -36,8 +36,6 @@ function Catalogue() {
 
     }, [currentPage])
 
-    console.log(query.get('page'))
-
     return (
         <div>
             <h4>Catalogue</h4>

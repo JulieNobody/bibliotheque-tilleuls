@@ -37,7 +37,7 @@ function BookDetail (){
                 </h3>
                 <p>Résumé :<br/>{book.description}</p>
 
-                <Link to={{ pathname: `/ModifLivre/?idLivre=${book.id}` }} >
+                <Link to={{ pathname: `/ModifLivre/${book.id}` }} >
                     Modifier le livre ✏️
                 </Link>
 

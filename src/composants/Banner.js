@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */ //FIXME : corriger erreur
 import '../style/Banner.css'
 import logo from '../assets/logo.png'
 import profilePicture from '../assets/profile-picture.png'

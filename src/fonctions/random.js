@@ -2,7 +2,7 @@
 export default function random(){
 
 
-    return fetch("https://localhost/books")
+    return fetch('https://localhost/books')
         .then((res) => res.json())
         .then((bookResponse) => {
             const bookList = bookResponse[`hydra:member`]
@@ -13,7 +13,7 @@ export default function random(){
                 )
             ]
 
-        });
+        })
         
 }
 

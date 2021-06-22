@@ -1,83 +1,138 @@
+/* eslint-disable no-unused-vars */ //FIXME : corriger erreur
 import { useForm } from 'react-hook-form'
-//import { useEffect, useState } from "react"
-//import axios from "axios"
+import React, { useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import * as yup from 'yup'
-import { setLocale } from 'yup'
 import '../style/NouveauLivre.css'
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router'
+import formatDate2 from '../fonctions/formatDate2'
 
+//import { useHistory } from 'react-router-dom'
 
-//FIXME : reg ex ISBN
-//FIXME : date de parution, DateTimeInterface (2021-06-03T07:46:42.652Z)
-//TODO : A FINIR
+   // -------------------- VALIDATION-------------------- (fonction réutilsée/ à sortir dans une autre fonction) //FIXME : changer avec fonction validation livre si ok
+   const useYupValidationResolver = validationSchema =>
+   useCallback(
+   async data => {
+       try {
+       const values = await validationSchema.validate(data, {
+           abortEarly: false
+       })
+
+       return {
+           values,
+           errors: {}
+       }
+       } catch (errors) {
+       return {
+           values: {},
+           errors: errors.inner.reduce(
+           (allErrors, currentError) => ({
+               ...allErrors,
+               [currentError.path]: {
+               type: currentError.type ?? 'validation',
+               message: currentError.message
+               }
+           }),
+           {}
+           )
+       }
+       }
+   },
+   [validationSchema]
+)
+
+    // instauration des regles de validation
+    //INFO : placé à l'exterieur du onSubmit pour éviter la dépense de ressource
+    let validationSchema = yup.object().shape({
+        title :
+            yup.string('Le titre doit être composé de lettres')
+            .required('Vous devez saisir un titre'),
+        isbn :
+            yup.string('L\'ISBN doit être composé de chiffres')
+            .required('Vous devez saisir un numéro ISBN')
+            .length (13, 'L\'ISBN doit comporter 13 chiffres')
+            .matches(/[0-9]/, 'L\'ISBN ne doit comporter que des chiffres'),
+        author :
+            yup.string('L\'auteur doit être composé de lettres').required('Vous devez saisir un auteur'),
+        publicationDate :
+            yup.date('La date de parution doit être une date')
+            .required('Vous devez indiquer une date de parution')
+            .default(function() { return new Date() }),
+        description :
+            yup.string('Le résumé doit être composé de lettres')
+            .required('Vous devez saisir un résumé du livre'),
+    })
 
 function ModifLivre (){
 
-    // -------------------- RECUPERATION DU PARAM DANS URL --------------------
-    function useQuery() {
-        return new URLSearchParams(useLocation().search)
+    // -------------------- DECLARATION VARIABLE MYBOOK --------------------
+    //INFO : objet JS != json -> faire stringify avant envoi
+    var myBook = {
+        title : '',
+        isbn : '',
+        author : '',
+        publicationDate : '',
+        description :''
     }
-    const [book, setBook] = useState({})
-    const query = useQuery()
-    const idLivre = query.get('idLivre')
 
+    const [postId, setPostId] = useState()
+
+    // -------------------- RECUPERATION DES DONNEES DU LIVRE --------------------
+    const { id } = useParams()
+    const [book, setBook] = useState({})
+    
     useEffect(() => {
-        fetch(`https://localhost/books/${idLivre}`)
+        fetch(`https://localhost/books/${id}`)
             .then((res) => res.json())
             .then((book) => setBook(book))
+    }, [id])
 
-    }, [idLivre])
-
-    console.log('query : ',query)
-    console.log('idLivre : ',idLivre)
-    console.log('book : ',book)
 
     
-    const messageErreur = ''
-    const { register, handleSubmit, formState: { errors } } = useForm()
+
+     // -------------------- RESOLVER--------------------
+     const resolver = useYupValidationResolver(validationSchema)
+
+    // -------------------- USEFORM--------------------
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver })
+
+    // -------------------- ONSUBMIT--------------------
     const onSubmit = data => {
-        console.log('data : ',data)
+        myBook = data
 
-        // -------------------- INITIALISATION AXIOS / YUP --------------------
+        myBook.publicationDate = formatDate2(myBook.publicationDate) + 'T00:00:00.000Z'
 
-        //configuration des messages d'erreur personnalisés
-        setLocale({
-            mixed: {
-              default: 'Champs non valide',
-            },
-          })
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(myBook)
+        }
 
-        // instauration des regles de validation
-        let schema = yup.object().shape({
-            title : yup.string().required(),
-            isbn : yup.number().required(),
-            author : yup.string().required(),
-            publicationDate : yup.date().required().default(function() { return new Date().toISOString() }),
-            description : yup.string().required(),
-        })
+        fetch(`https://localhost/books/${id}`, requestOptions)
+          .then(response => response.json())
+          .then(data => setPostId(data.id))
+
         
-        schema
-            .validate(data)
-            .then(function(value) {
-                console.log('value : ',value)
-            })
-            .catch(function(err){
-                console.log('err : ',err)
-                const messageErreur = 'erreur !'
-                console.log('messageErr', messageErreur)
 
-            })
 
-            console.log('messageErr', messageErreur)
-            console.log('schema', schema)
-     
+        //FIXME : ajouter redirection
+
+        //ne fonctionne pas
+        // const history = useHistory()
+        // history.push(`/`)
+
+    // const redirect = useCallback((e) => {
+    //     e.preventDefault()
+    //     history.push(`/ResultRecherche/?title=${recherche}`)
+    // }, [recherche])
+
+
+
     }
-
 
     return (
         <div className ="nouveaulivre">
-             <h4>Modifier un livre</h4>
+             <h4>Modifier le livre</h4>
 
             {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -85,59 +140,42 @@ function ModifLivre (){
                 {/* --------- TITRE --------- */}
                 <div className="blocForm">
                     <label>Titre</label>
-                    <input value={book.title} type="text" {...register('title', { 
-                        required: true,
-                        minLength : 3 })} />
+                    <input value={book.title} type="text" {...register('title')}/>
                 </div>
 
-                <div className="blocForm">
-                    {errors.title && <span>Vous devez saisir un titre</span>}
-                </div>
+                {errors.title && <div className="blocForm messageErreur">- {errors.title.message} -</div>}
 
                 {/* --------- ISBN --------- */}
                 <div className="blocForm">
                     <label>ISBN</label>
-                    <input value={book.isbn} type="text" {...register('isbn', { 
-                        required: true,
-                        //pattern: ^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$
-                    })}/>
+                    <input value={book.isbn} type="text" {...register('isbn')}/>
                 </div>
 
-                <div className="blocForm">
-                    {errors.isbn && <span>Vous devez saisir un numéro ISBN</span>}
-                </div>
-                <p>message erreur : {messageErreur}</p>
+                {errors.isbn && <div className="blocForm messageErreur">- {errors.isbn.message} -</div>}
 
                 {/* --------- AUTEUR --------- */}
                 <div className="blocForm">
                     <label>Auteur</label>
-                    <input value={book.author} type="text" {...register('author', { required: true })} />
+                    <input value={book.author} type="text" {...register('author')}/>
                 </div>
 
-                <div className="blocForm">
-                    {errors.author && <span>Vous devez saisir un auteur</span>}
-                </div>
+                {errors.author && <div className="blocForm messageErreur">- {errors.author.message} -</div>}
 
                 {/* --------- DATE PARUTION --------- */}
                 <div className="blocForm">
                     <label>Date de parution</label>
-                    <input value={book.publicationDate} type="date" {...register('publicationDate', { required: true })} />
+                    <input value={formatDate2(book.publicationDate)} type="date" {...register('publicationDate')}/>
                 </div>
 
-                <div className="blocForm">
-                    {errors.publicationDate && <span>Vous devez saisir une date de parution</span>}
-                </div>
+                {errors.publicationDate && <div className="blocForm messageErreur">- {errors.publicationDate.message} -</div>}
 
                 {/* --------- RESUME --------- */}
                 <div className="blocForm">
                     <label>Résumé</label>
-                    <textarea value={book.description} rows="10" cols="100" {...register('description', { required: true })} />
+                    <textarea rows="10" cols="100" value={book.description} type="text" {...register('description')}/>
                 </div>
 
-                <div className="blocForm">
-                    {errors.description && <span>Vous devez saisir un résumé</span>}
-                </div>
-
+                {errors.description && <div className="blocForm messageErreur">- {errors.description.message} -</div>}
 
                 {/* --------- VALIDATION --------- */}
                 <input className="blocForm" type="submit" value="Valider la saisie"/>

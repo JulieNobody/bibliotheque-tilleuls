@@ -12,7 +12,6 @@ import ErrorPage from './ErrorPage'
 import React from 'react'
 
 function App() {
-//FIXME : errorPage ne fonctionne pas
 //INFO : "exact" : pour que seul "/" dirige vers cette page
 //INFO : ":id" pas necessaire quand on rècupère le param dans url via useQuery
 //INFO : "/:id" desactive ErrorPage puisque tt les fausses url sont considérées comme des id
@@ -21,8 +20,6 @@ function App() {
 //A-VOIR : useCallback
 //A-VOIR : react hook form
 
-//FIXME : erreurs l33 etc
-
   return (
     <BrowserRouter>
       <Banner />
@@ -30,11 +27,24 @@ function App() {
 
       <Switch>
 
-        <Route path="/ResultRecherche" children={<ResultRecherche />} />
-        <Route path="/NouveauLivre" children={<NouveauLivre />} />
-        <Route path="/ModifLivre" children={<ModifLivre />} />
-        <Route path="/BookDetail/:id" children={<BookDetail />} />
+        <Route path="/ResultRecherche">
+          <ResultRecherche />
+        </Route>
+
+        <Route path="/NouveauLivre">
+          <NouveauLivre />
+        </Route>
+
+        <Route path="/ModifLivre/:id">
+          <ModifLivre />
+        </Route>
+
+        <Route path="/BookDetail/:id">
+          <BookDetail />
+        </Route>
+
         <Route exact path="/" component={Catalogue} />
+
         <Route component={ErrorPage} />
 
       </Switch>

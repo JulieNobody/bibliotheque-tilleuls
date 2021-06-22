@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */ //FIXME : corriger erreur
 import '../style/Book.css'
 import { Link } from 'react-router-dom'
 import formatDate from '../fonctions/formatDate'
 import React from 'react'
-//FIXME
+//FIXME : arguments erreur
 function Book ({id, title, author, publicationDate}){    
     
     return (
@@ -21,4 +22,4 @@ function Book ({id, title, author, publicationDate}){
     )
 }
 
-export default Book;
+export default Book
