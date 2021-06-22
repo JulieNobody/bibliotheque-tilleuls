@@ -19,7 +19,7 @@ function Logo() {
 function Connexion() {
     return (
         <div className="connexion">
-            <img src={profilePicture} alt='logo' />
+            <img src={profilePicture} alt='profilePicture' />
             <div  className="liens">
                 <p>s'inscrire</p>
                 <p>se connecter</p>

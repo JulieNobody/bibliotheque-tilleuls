@@ -10,6 +10,22 @@ FAF0CA - beige
     border: solid 3px red;
 */
 
+/* ------------------- Fonctions CSS ------------------- */
+
+/* FIXME : ajouter webkit */
+@keyframes scale-up {
+  0%
+  {
+    color: transparent;
+  }
+  100%
+  {
+    color: #232C33;
+  }
+}
+
+
+
 
 body {
   margin: 0;
@@ -33,6 +49,10 @@ h4
   font-size: 25px;
   font-weight: 1000;
   color: #232C33;
+
+  -webkit-animation: scale-up 2s;
+	        animation: scale-up 2s;
+
 }
 
 a

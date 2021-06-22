@@ -24,6 +24,31 @@ function BookDetail (){
 
     }, [id])
 
+
+    function onSubmit() //FIXME : ne fonctionne pas + pas de redirect
+    {
+        if ( confirm( 'Etes-vous sûr de vouloir supprimer ce livre ?' ) ) {
+            console.log('ok')
+
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            //body: JSON.stringify(myBook)
+        }
+
+        fetch(`https://localhost/books/${id}`, requestOptions)
+          .then(response => response.json())
+            
+
+        } else {
+            console.log('pas ok')
+        }
+
+        console.log('test')
+
+    }
+
+
     return ( 
         <div>
             <h4>Détail du livre</h4>
@@ -37,9 +62,19 @@ function BookDetail (){
                 </h3>
                 <p>Résumé :<br/>{book.description}</p>
 
-                <Link to={{ pathname: `/ModifLivre/${book.id}` }} >
-                    Modifier le livre ✏️
-                </Link>
+                <div className="liens">
+
+                    <Link to={{ pathname: `/ModifLivre/${book.id}` }} >
+                        Modifier le livre ✏️
+                    </Link>
+
+                    <form onSubmit={(onSubmit)}>
+                        <input className="blocForm" type="submit" value="Supprimer le livre 🗑️"></input>
+                    </form>
+
+                </div>
+
+         
 
             </div>
 

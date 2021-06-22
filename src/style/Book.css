@@ -1,10 +1,28 @@
+/* ------------------- Fonctions CSS ------------------- */
+
+/* FIXME : ajouter webkit */
+@keyframes apparition {
+  0%
+  {
+    opacity: 0;
+  }
+  100%
+  {
+    opacity: 1;
+  }
+}
+
+
 .book
 {
     border: solid 3px #5A7D7C;
     list-style: none;
     width: 300px;
     padding: 15px;
-    margin : 15px
+    margin : 15px;
+
+    -webkit-animation: apparition 2s;
+            animation: apparition 2s;
 }
 
 h2

@@ -59,10 +59,16 @@
 }
 
 /* ------------------- LIENS ------------------- */
+.liens
+{
+  display: flex;
+  flex-direction: row;
+}
 
 .bookDetail a
 {
   color: #232C33;
+  font-size: 17px;
   text-decoration: none;
   margin: 10px;
   padding-bottom: 4px;
@@ -73,3 +79,23 @@
 {
     color: #232C33;
 }
+
+.bookDetail input
+{
+  color: #232C33;
+  font-size: 17px;
+  background-color: transparent;
+  text-decoration: none;
+  margin: 10px;
+  padding-bottom: 4px;
+  border: none;
+  border-bottom: solid 3px #5A7D7C;
+}
+
+.bookDetail form :hover
+{
+  cursor: pointer;
+
+}
+
+
